@@ -1,0 +1,10 @@
+scenario_id,tracking_ref,origin_zip,dest_zip,dest_type,dest_region,weight_lbs,length_in,width_in,height_in,service_code,account_id,saturday_flag,dg_flag,expected_total,expected_error_code,notes
+memphis-dallas-ground-residential,DEMO-001,38118,75201,R,US,25,12,10,8,GND,ACCT-1001,N,N,26.26,0,Standard ground residential
+memphis-dallas-express-gold-saturday,DEMO-002,38118,75201,C,US,25,12,10,8,EXP,ACCT-3003,Y,N,58.46,0,Express commercial gold saturday
+memphis-dallas-dg-express,DEMO-003,38118,75201,C,US,25,12,10,8,EXP,ACCT-1001,N,Y,86.24,0,DG surcharge on express
+memphis-dallas-po-blocked-dg,DEMO-004,38118,75201,C,US,25,12,10,8,PO,ACCT-1001,N,Y,0,-2042,DG blocks priority overnight
+memphis-dallas-heavy-ground,DEMO-005,38118,75201,C,US,160,20,18,16,GND,ACCT-1001,N,N,71.12,0,Heavy ground weight tier
+memphis-dallas-oversize-ground,DEMO-006,38118,75201,C,US,25,48,30,30,GND,ACCT-1001,N,N,115.92,0,Oversize ground fee
+memphis-dallas-oversize-exp-blocked,DEMO-007,38118,75201,C,US,25,48,30,30,EXP,ACCT-1001,N,N,0,-2043,Oversize blocks air
+memphis-international-express,DEMO-008,38118,00000,C,INTL,25,12,10,8,EXP,ACCT-2002,N,N,101.08,0,International express silver discount
+memphis-international-ground-blocked,DEMO-009,38118,00000,C,INTL,25,12,10,8,GND,ACCT-1001,N,N,0,-2050,International requires express

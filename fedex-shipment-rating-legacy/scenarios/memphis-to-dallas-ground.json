@@ -1,0 +1,15 @@
+{
+  "trackingRef": "DEMO-001",
+  "originZip": "38118",
+  "destZip": "75201",
+  "destType": "R",
+  "destRegion": "US",
+  "weightLbs": 25,
+  "lengthIn": 12,
+  "widthIn": 10,
+  "heightIn": 8,
+  "serviceCode": "GND",
+  "accountId": "ACCT-1001",
+  "saturdayDelivery": false,
+  "dangerousGoods": false
+}

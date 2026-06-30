@@ -1,0 +1,8 @@
+server:
+  port: 8080
+
+migration:
+  feature-flags:
+    java-enabled-accounts:
+      - ACCT-3003
+      - ACCT-2002

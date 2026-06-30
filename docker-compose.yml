@@ -1,0 +1,19 @@
+services:
+  oracle:
+    image: gvenzl/oracle-free:23-slim
+    container_name: fedex-demo-oracle
+    environment:
+      ORACLE_PASSWORD: oracle
+      APP_USER: rating
+      APP_USER_PASSWORD: rating
+    ports:
+      - "1521:1521"
+    volumes:
+      - ./fedex-shipment-rating-legacy/legacy/oracle/schema:/opt/oracle/scripts/schema
+      - ./fedex-shipment-rating-legacy/legacy/oracle/packages:/opt/oracle/scripts/packages
+      - ./fedex-shipment-rating-legacy/legacy/oracle/scripts:/opt/oracle/scripts/legacy
+    healthcheck:
+      test: ["CMD", "healthcheck.sh"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
