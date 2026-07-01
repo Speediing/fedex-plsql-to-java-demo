@@ -1,6 +1,7 @@
 package com.fedexdemo.rating.engine;
 
 import com.fedexdemo.rating.domain.RatingOutcome;
+import com.fedexdemo.rating.domain.RejectedRating;
 import com.fedexdemo.rating.domain.Shipment;
 import org.springframework.stereotype.Component;
 
@@ -26,9 +27,23 @@ import org.springframework.stereotype.Component;
 @Component
 public class RatingEngine {
 
+    private final WeightLimitPolicy weightLimitPolicy;
+
+    public RatingEngine(WeightLimitPolicy weightLimitPolicy) {
+        this.weightLimitPolicy = weightLimitPolicy;
+    }
+
     public RatingOutcome rate(Shipment shipment) {
+        var overweightAirRejection = weightLimitPolicy.evaluate(shipment);
+        if (overweightAirRejection.isPresent()) {
+            return new RejectedRating(
+                    shipment.trackingRef(),
+                    shipment.requestedService(),
+                    overweightAirRejection.get());
+        }
+
         // TODO(demo): extract domain from fedex-shipment-rating-legacy PL/SQL packages.
-        // Implement EligibilityPolicy + PricingPolicy, wire ReferenceData, and make
+        // Continue extracting EligibilityPolicy + PricingPolicy, wire ReferenceData, and make
         // CharacterizationTest pass for all 9 scenarios.
         throw new UnsupportedOperationException(
                 "Rating migration not implemented yet - this is the live-demo task");
