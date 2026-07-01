@@ -27,7 +27,7 @@ class RatingControllerTest {
     }
 
     @Test
-    void ratingEndpointReturnsNotImplementedUntilMigrated() throws Exception {
+    void ratingEndpointReturnsRatedResponse() throws Exception {
         mockMvc.perform(post("/ratings")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
@@ -47,7 +47,38 @@ class RatingControllerTest {
                                   "dangerousGoods": false
                                 }
                                 """))
-                .andExpect(status().isNotImplemented())
-                .andExpect(jsonPath("$.status").value("NOT_IMPLEMENTED"));
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.status").value("RATED"))
+                .andExpect(jsonPath("$.totalAmount").value(26.26))
+                .andExpect(jsonPath("$.zoneCode").value(4))
+                .andExpect(jsonPath("$.errorCode").value(0));
+    }
+
+    @Test
+    void ratingEndpointReturnsRejectedResponseForDangerousGoodsOnOvernight() throws Exception {
+        mockMvc.perform(post("/ratings")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                  "trackingRef": "DEMO-004",
+                                  "originZip": "38118",
+                                  "destZip": "75201",
+                                  "destType": "C",
+                                  "destRegion": "US",
+                                  "weightLbs": 25,
+                                  "lengthIn": 12,
+                                  "widthIn": 10,
+                                  "heightIn": 8,
+                                  "serviceCode": "PO",
+                                  "accountId": "ACCT-1001",
+                                  "saturdayDelivery": false,
+                                  "dangerousGoods": true
+                                }
+                                """))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.status").value("REJECTED"))
+                .andExpect(jsonPath("$.errorCode").value(-2042))
+                .andExpect(jsonPath("$.errorMessage")
+                        .value("Dangerous goods not allowed on Priority Overnight"));
     }
 }

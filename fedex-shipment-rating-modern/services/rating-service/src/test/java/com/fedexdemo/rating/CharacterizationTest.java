@@ -15,7 +15,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +24,7 @@ import org.springframework.boot.test.context.SpringBootTest;
  * Golden-master / characterization tests. Expected values come from
  * fedex-shipment-rating-legacy/docs/expected-ratings.csv, verified against the
  * legacy PL/SQL packages.
- *
- * DISABLED on purpose: RatingEngine is still a stub. Remove @Disabled during the
- * demo once the migration logic is implemented.
  */
-@Disabled("Enable after porting RatingEngine - see fedex-shipment-rating-legacy/docs/expected-ratings.csv")
 @SpringBootTest
 class CharacterizationTest {
 
