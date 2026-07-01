@@ -50,4 +50,32 @@ class RatingControllerTest {
                 .andExpect(status().isNotImplemented())
                 .andExpect(jsonPath("$.status").value("NOT_IMPLEMENTED"));
     }
+
+    @Test
+    void ratingEndpointRejectsOverweightPriorityOvernightFromWeightLimitPolicy() throws Exception {
+        mockMvc.perform(post("/ratings")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                  "trackingRef": "FED-3",
+                                  "originZip": "38118",
+                                  "destZip": "75201",
+                                  "destType": "C",
+                                  "destRegion": "US",
+                                  "weightLbs": 151,
+                                  "lengthIn": 12,
+                                  "widthIn": 10,
+                                  "heightIn": 8,
+                                  "serviceCode": "PO",
+                                  "accountId": "ACCT-1001",
+                                  "saturdayDelivery": false,
+                                  "dangerousGoods": false
+                                }
+                                """))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.status").value("REJECTED"))
+                .andExpect(jsonPath("$.errorCode").value(-2041))
+                .andExpect(jsonPath("$.errorMessage").value("Weight exceeds air service limit"))
+                .andExpect(jsonPath("$.engine").value("legacy-plsql-adapter"));
+    }
 }

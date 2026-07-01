@@ -10,7 +10,7 @@ Traceability from business behavior to legacy source and Java replacement.
 | E2 | DG blocks PO | `SERVICE_ELIGIBILITY_PKG.check_service` | `DangerousGoodsPolicy` |
 | E3 | Oversize blocks EXP and PO | `SERVICE_ELIGIBILITY_PKG.check_service` | `OversizePolicy` |
 | E4 | Non-US destination allows EXP only | `SERVICE_ELIGIBILITY_PKG.check_service` | `InternationalLanePolicy` |
-| E5 | Duplicate PO weight check | `SHIPMENT_RATING_PKG.rate_shipment` (drift) | Removed; single policy path |
+| E5 | Historical duplicate PO weight check | Removed from `SHIPMENT_RATING_PKG.rate_shipment`; `SERVICE_ELIGIBILITY_PKG.check_service` is the single legacy path | `WeightLimitPolicy` |
 
 ## Pricing rules
 

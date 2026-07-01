@@ -26,7 +26,6 @@ Expected output for the default script: total **26.26**, error code **0**.
 ## Legacy smells (intentional)
 
 - Shared package state (`g_last_zone`)
-- Duplicated weight guard between packages
 - Magic error codes (`-2041`, `-2042`, …)
 - Rating procedure mixes calculation with audit insert
 
