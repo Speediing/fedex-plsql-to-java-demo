@@ -129,13 +129,6 @@ CREATE OR REPLACE PACKAGE BODY SHIPMENT_RATING_PKG AS
             RETURN;
         END IF;
 
-        -- duplicated weight guard (legacy drift)
-        IF p_weight_lbs > 150 AND p_service_code = 'PO' THEN
-            p_error_code := -2041;
-            p_error_msg  := 'Weight exceeds air service limit';
-            RETURN;
-        END IF;
-
         BEGIN
             SELECT base_amount INTO v_base
               FROM service_base_rate
