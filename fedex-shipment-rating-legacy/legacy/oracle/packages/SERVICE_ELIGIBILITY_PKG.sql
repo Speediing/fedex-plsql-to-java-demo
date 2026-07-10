@@ -1,6 +1,6 @@
 CREATE OR REPLACE PACKAGE SERVICE_ELIGIBILITY_PKG AS
     /*
-     * Legacy eligibility checks. Rules overlap with SHIPMENT_RATING_PKG by design.
+     * Legacy eligibility checks. SHIPMENT_RATING_PKG delegates rejection rules here.
      * Error codes are negative integers consumed by upstream callers.
      */
     PROCEDURE check_service (
